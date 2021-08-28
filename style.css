@@ -1,0 +1,33 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	background: #444;
+	color: white;
+}
+.title{
+	display: flex;
+	justify-content: space-between;
+	text-align: center;
+	padding: 0 6rem;
+}
+.container{
+	display: flex;
+	justify-content: center;
+}
+.visualise{
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.bar{
+	top: 0;
+	width: 20px;
+	/*height: 200px;*/
+	background: cyan;
+	margin: 0 10px;
+	transition: 5s all ease-in;
+}

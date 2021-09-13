@@ -6,6 +6,11 @@
 body{
 	background: #444;
 	color: white;
+	min-height: 100vh;
+}
+h1{
+	text-align: center;
+	padding: 1rem;
 }
 .title{
 	display: flex;
@@ -13,9 +18,15 @@ body{
 	text-align: center;
 	padding: 0 6rem;
 }
+.title p{
+	padding: 2rem;
+	font-size: 20px;
+	text-decoration: underline;
+}
 .container{
 	display: flex;
 	justify-content: center;
+
 }
 .visualise{
 	height: 100%;
@@ -25,9 +36,8 @@ body{
 }
 .bar{
 	top: 0;
-	width: 20px;
-	/*height: 200px;*/
+	width: 7px;
 	background: cyan;
-	margin: 0 10px;
+	margin: 0 5px;
 	transition: 5s all ease-in;
 }

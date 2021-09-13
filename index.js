@@ -1,156 +1,218 @@
+//accessing all divs with bars to sort
 let vis_b = document.getElementById('visualise_bubble');
 let vis_i = document.getElementById('visualise_insertion');
 let vis_s = document.getElementById('visualise_selection');
-let n = prompt("enter size of array");
-let array = new Array(n);
-let array1 = new Array(n);
-let array2 = new Array(n);
+let vis_m = document.getElementById('visualise_merge');
 
-function addToBubble( ele ){
-	let bar = document.createElement("div");
+//reading the size of array
+let n = prompt("enter size of array");
+
+//declaring arrays
+let arrayBubble = new Array(n);
+let arrayInsertion = new Array(n);
+let arraySelection = new Array(n);
+let arrayMerge = new Array(n)
+
+//functions to add bars 
+let bar, h;
+function addToBubble( ele , w = 7){
+	bar = document.createElement("div");
 	bar.classList.add("bar")
-	let h = ele*5;
+	h = ele*5;
 	bar.style.height = h+'px';
+	bar.style.width = w+'px';
 	vis_b.appendChild(bar);
 }
 
-function addToInsertion(ele) {
-	let bar = document.createElement("div");
-	bar.classList.add("bar")
-	let h = ele*5;
-	bar.style.height = h+'px';
-	vis_i.appendChild(bar);
-}
-function addToSelection(ele){
-	let bar = document.createElement("div");
-	bar.classList.add("bar")
-	let h = ele*5;
-	bar.style.height = h+'px';
-	vis_s.appendChild(bar);	
-}
-for (let i = 0; i < n; i++) {
-	array[i] = Math.floor(Math.random()*100);
-	array1[i] = array[i];
-	array2[i] = array[i];
-	console.log(array[i]);	
-	addToBubble(array[i]);
-	addToInsertion(array1[i]);
-	addToSelection(array2[i]);
-	/*let bar = document.createElement("div");
-	bar.classList.add("bar")
-	let h = array[i]*5;
-	bar.style.height = h+'px';
-	vis_i.appendChild(bar);
+function addToInsertion(ele, w = 7) {
 	bar = document.createElement("div");
 	bar.classList.add("bar")
-	h = array[i]*5;
+	h = ele*5;
 	bar.style.height = h+'px';
-	vis_b.appendChild(bar);*/
+	bar.style.width = w+'px';
+	vis_i.appendChild(bar);
 }
-console.log(array)
+function addToSelection(ele, w = 7){
+	bar = document.createElement("div");
+	bar.classList.add("bar")
+	h = ele*5;
+	bar.style.height = h+'px';
+	bar.style.width = w+'px';
+	vis_s.appendChild(bar);	
+}
+function addToMerge(ele, w = 7) {
+	bar = document.createElement("div");
+	bar.classList.add("bar")
+	h = ele*5;
+	bar.style.height = h+'px';
+	bar.style.width = w+'px';
+	vis_m.appendChild(bar);		
+}
+
+//function to generate random numbers to sort
+for (let i = 0; i < n; i++) {
+	arrayBubble[i] = Math.floor(Math.random()*100);
+	arrayInsertion[i] = arrayBubble[i];
+	arraySelection[i] = arrayBubble[i];
+	arrayMerge[i] = arrayBubble[i];
+	if( n >= 20){
+		addToBubble(arrayBubble[i], 5);
+		addToInsertion(arrayInsertion[i], 5);
+		addToSelection(arraySelection[i], 5);
+		addToMerge(arrayMerge[i], 5);	
+	}
+	else{
+		addToBubble(arrayBubble[i]);
+		addToInsertion(arrayInsertion[i]);
+		addToSelection(arraySelection[i]);
+		addToMerge(arrayMerge[i]);
+	}
+}
+
+//bubble sort
 let bars = vis_b.querySelectorAll('.bar')
-console.log(bars)
 async function bSort(delay = 300){
 	for(let i = 0; i <= n-1; i++){
 		for(let j = 0; j < n-1; j++){
-				if( array[j] > array[j+1]){
-					let temp = array[j]
-					array[j] = array[j+1]
-					array[j+1] = temp
+				if( arrayBubble[j] > arrayBubble[j+1]){
+					let temp = arrayBubble[j];
+					arrayBubble[j] = arrayBubble[j+1];
+					arrayBubble[j+1] = temp;
 
-					bars[j].style.height = (array[j]*5)+'px';
-					bars[j+1].style.height = (array[j+1]*5)+'px';
+					bars[j].style.height = (arrayBubble[j]*5)+'px';
+					bars[j+1].style.height = (arrayBubble[j+1]*5)+'px';
 				}
-				/*await new Promise((resolve)=>{
-					setTimeout(()=>{
-						resolve()
-					},400)
-				});*/
 		}
 		await new Promise((resolve)=>{
 			setTimeout(()=>{
-				//alert('pass1')
-				resolve()
+				resolve();
 			},400)
 		});
 	}
 }
 
+//insertion sort
 let bars1 = vis_i.querySelectorAll('.bar')
-console.log(bars1)
 async function iSort(delay = 300){
 	for(let i = 0; i <= n-1; i++){
-
 		for(let j = i+1; j >= 0; j--){
-				//setTimeout(()=>{
-				if( array1[j] < array1[j-1]){
-					let temp = array1[j]
-					array1[j] = array1[j-1]
-					array1[j-1] = temp
-
-					bars1[j].style.height = (array1[j]*5)+'px';
-					bars1[j-1].style.height = (array1[j-1]*5)+'px';
-				}
-				/*await new Promise((resolve)=>{
-					setTimeout(()=>{
-						resolve()
-					},600)
-				});*/
-		//	}, 100)
+			if( arrayInsertion[j] < arrayInsertion[j-1]){
+				let temp = arrayInsertion[j];
+				arrayInsertion[j] = arrayInsertion[j-1];
+				arrayInsertion[j-1] = temp;
+				bars1[j].style.height = (arrayInsertion[j]*5)+'px';
+				bars1[j-1].style.height = (arrayInsertion[j-1]*5)+'px';
+			}
 		}
 		await new Promise((resolve)=>{
 			setTimeout(()=>{
-				//alert('pass1')
-				resolve()
+				resolve();
 			},400)
 		});
 	}
 }
 
+//selection sort
 let bars2 = vis_s.querySelectorAll('.bar')
-console.log(bars2)
 async function sSort(delay = 100){
 	for(let i = 0; i <= n-1; i++){
-		let min = i
+		let min = i;
 		for(let j = i+1; j <= n-1; j++){
-			if( array2[j] < array2[min]){
-				min = j
+			if( arraySelection[j] < arraySelection[min]){
+				min = j;
 			}
-			/*await new Promise((resolve)=>{
-				setTimeout(()=>{
-					resolve()
-				},400)
-			});*/
 		}
-		let temp = array2[i]
-		array2[i] = array2[min]
-		array2[min] = temp
+		let temp = arraySelection[i];
+		arraySelection[i] = arraySelection[min];
+		arraySelection[min] = temp;
 
-		bars2[i].style.height = (array2[i]*5)+'px';
-		bars2[min].style.height = (array2[min]*5)+'px';
+		bars2[i].style.height = (arraySelection[i]*5)+'px';
+		bars2[min].style.height = (arraySelection[min]*5)+'px';
 		await new Promise((resolve)=>{
 			setTimeout(()=>{
-				//alert('pass1')
-				resolve()
+				resolve();
 			},400)
 		});
 	}
 }
 
-async function sort(){
-	bSort()
-	await new Promise((resolve)=>{
-		resolve()
-	},0)
-	iSort()	
-	await new Promise((resolve)=>{
-		resolve()
-	},0)
-	sSort()
+
+//merge sort
+let barsMerge = vis_m.querySelectorAll('.bar');
+function mSort(){
+	merge_sort(0, arrayMerge.length-1);
 }
 
+
+async function merge_sort(start, end, delay = 300){
+	if(start < end){
+		let mid = Math.floor((start + end) / 2);
+		merge_sort(start, mid);
+		merge_sort(mid+1, end);
+		await new Promise((resolve)=>{
+			setTimeout(()=>{
+				resolve();
+			},400)
+		});
+		merge(start, mid, end);
+		await new Promise((resolve)=>{
+			setTimeout(()=>{
+				resolve();
+			},400)
+		});
+	}
+
+}
+
+function merge(start, mid, end){
+	let temp = new Array(end-start+1);
+
+	let i = start, j = mid+1, k = 0;
+
+	while( i <= mid && j <= end){
+		if( arrayMerge[i] < arrayMerge[j]){
+			temp[k++] = arrayMerge[i++];
+		}
+		else{
+			temp[k++] = arrayMerge[j++];
+		}
+	}
+	while(i <= mid){
+		temp[k++] = arrayMerge[i++];
+	}
+
+	while(j <= end){
+		temp[k++] = arrayMerge[j++];
+	}
+	k=0;
+	for( let l = start; l <= end; l++){
+		arrayMerge[l] = temp[k];
+		barsMerge[l].style.height = (temp[k]*5)+'px';
+		k++;
+	}
+}
+
+//sort
+async function sort(){
+	bSort();
+	await new Promise((resolve)=>{
+		resolve();
+	},0)
+	iSort();
+	await new Promise((resolve)=>{
+		resolve();
+	},0)
+	sSort();
+	await new Promise((resolve)=>{
+		resolve();
+	},0)
+	mSort();
+}
+
+//call sort function
 sort();
 
-console.log(array)
-console.log(array1)
-console.log(array2)
+console.log(arrayBubble);
+console.log(arrayInsertion);
+console.log(arraySelection);
+console.log(arrayMerge);

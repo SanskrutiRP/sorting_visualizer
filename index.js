@@ -5,7 +5,7 @@ let vis_s = document.getElementById('visualise_selection');
 let vis_m = document.getElementById('visualise_merge');
 
 //reading the size of array
-let n = prompt("enter size of array");
+let n = prompt("Size of array you want to sort ");
 
 //declaring arrays
 let arrayBubble = new Array(n);
